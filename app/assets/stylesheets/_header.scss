@@ -1,0 +1,55 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ */
+
+body {
+  background-color: $bg-color;
+}
+
+.site-header {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  left: 15px;
+  height: 35px;
+  display: block;
+  z-index: 1000;
+  font-family: sans-serif;
+  font-size: 13px;
+  line-height: 14px;
+  border-bottom: 1px dotted rgba($decorate-color, 0.5);
+
+  nav {
+    width: 100%;
+    color: $decorate-color;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+
+    li:first-child {
+      position: absolute;
+      left: 0;
+    }
+    li {
+      display: inline-block;
+      margin-left: 5px;
+      margin-right: 5px;
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    }
+
+  }
+}

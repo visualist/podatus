@@ -1,12 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Booksite</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="site-header">
+    <nav>
+      <ul>
+        <li><%= link_to_unless_current "Sitename", root_path %></li>
+        <li><%= link_to_unless_current "Books", books_path %></li>
+        <li><%= link_to_unless_current "About", about_path %></li>
+      </ul>
+    </nav>
+  </div>
 
 <%= yield %>
 
