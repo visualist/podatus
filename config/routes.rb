@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
   get 'landing/index'
-
   get 'landing/about'
+  get 'about' => 'landing#about'
 
-  get 'books/index'
+  get 'books' => 'books#index'
+  get 'books/:id' => 'books#show'
+  get 'book/:id' => 'books#show'
 
-  get 'books/show'
+  # TODO: will need a way to get json-based data for a given book or a chapter within
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  root 'landing#index'
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
