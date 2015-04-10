@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'landing/index'
+
+  get 'landing/about'
+
   get 'books/index'
 
   get 'books/show'
