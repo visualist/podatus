@@ -1,6 +1,6 @@
 class LandingController < ApplicationController
   def index
-    #@sitename = 'name'
+    @background_text = BackgroundText::All.sample
     @books = Book.all.order(:published_year)
   end
 
