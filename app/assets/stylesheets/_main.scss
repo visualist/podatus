@@ -13,14 +13,18 @@ body {
   }
 
   .home-page {
-    margin-top: 60px;
+
+    margin-top: 90px;
     margin-left: 2.0em;
     font-family: 'kaffeesatz-regular';
     font-size: 100%;
 
-    .inner-page {
-      margin-top: 70px;
-      margin-left: 3.0em;
+    .home-left {
+      float: left;
+      width: 40%;
+
+      margin-top: 0px;
+      margin-left: 2.0em;
 
       h2 {
         margin-left: 1.8em;
@@ -38,12 +42,21 @@ body {
       }
 
     }
+
+    .home-right {
+      float: left;
+      width: 40%;
+      margin-top: 12px;
+      margin-left: 2.0em;
+    }
+
   }
+
 }
 
 #back-text {
   position: absolute;
-  top: 0;
+  bottom: 0;
   z-index: -1;
   /* visibility: hidden; */
   color: #242424;
