@@ -14,9 +14,12 @@
   <div class="page-header">
     <nav>
       <ul>
-        <li><%= link_to_unless_current ApplicationController::Sitename, root_path %><div class="circle home" cx="40" cy="36" r="6"></span></li>
-        <li><%= link_to_unless_current "Books", books_path %><div class="circle books" cx="40" cy="36" r="6"></span></li>
-        <li><%= link_to_unless_current "About", about_path %><div class="circle about" cx="40" cy="36" r="6"></span></li>
+        <li><%= link_to_unless_current ApplicationController::Sitename, root_path %>
+            <div class="circle <%= on_page(root_path) %> home" cx="40" cy="36" r="6"></span></li>
+        <li><%= link_to_unless_current "Books", books_path %>
+            <div class="circle <%= on_page(books_path) %> books" cx="40" cy="36" r="6"></span></li>
+        <li><%= link_to_unless_current "About", about_path %>
+            <div class="circle <%= on_page(about_path) %> about" cx="40" cy="36" r="6"></span></li>
       </ul>
     </nav>
   </div>

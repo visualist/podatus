@@ -38,22 +38,27 @@
 
   .circle {
     display: inline-block;
+    visibility: hidden;
     position: relative;
     top: 17px;
-    left: -22px;
-    width: 10px;
-    height: 10px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
-    background-color: #ffd000;
+    background-color: black;
   }
   .circle.home {
     left: -45px;
   }
-
-/*svg circle*/
-  circle {
-    stroke: #006600; 
-    fill: #00cc00;
+  .circle.books {
+    left: -26px;
   }
+  .circle.about {
+    left: -24px;
+  }
+  .circle.active {
+    visibility: visible;
+    background-color: $circle-nav-color;
+  }
+
 }
 
