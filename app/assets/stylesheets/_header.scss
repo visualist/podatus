@@ -1,22 +1,5 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
- */
 
-body {
-  background-color: $bg-color;
-}
-
-.site-header {
+.page-header {
   position: absolute;
   top: 0;
   right: 15px;
@@ -52,4 +35,25 @@ body {
     }
 
   }
+
+  .circle {
+    display: inline-block;
+    position: relative;
+    top: 17px;
+    left: -22px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ffd000;
+  }
+  .circle.home {
+    left: -45px;
+  }
+
+/*svg circle*/
+  circle {
+    stroke: #006600; 
+    fill: #00cc00;
+  }
 }
+

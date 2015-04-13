@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Booksite</title>
+  <title><%= ApplicationController::Sitename %></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -11,17 +11,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="site-header">
+  <div class="page-header">
     <nav>
       <ul>
-        <li><%= link_to_unless_current "Sitename", root_path %></li>
-        <li><%= link_to_unless_current "Books", books_path %></li>
-        <li><%= link_to_unless_current "About", about_path %></li>
+        <li><%= link_to_unless_current ApplicationController::Sitename, root_path %><div class="circle home" cx="40" cy="36" r="6"></span></li>
+        <li><%= link_to_unless_current "Books", books_path %><div class="circle books" cx="40" cy="36" r="6"></span></li>
+        <li><%= link_to_unless_current "About", about_path %><div class="circle about" cx="40" cy="36" r="6"></span></li>
       </ul>
     </nav>
   </div>
 
+  <div class="page-container">
 <%= yield %>
+  </div>
 
 </body>
 </html>
