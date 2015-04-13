@@ -1,1 +1,9 @@
-<h1>Books list</h1>
+<div class="books-page">
+  <% @books.each do |book| %>
+    <div class="book-item">
+      &ldquo;<%= book.title %>&rdquo;
+      <div class="graph-horizontal">
+      </div>
+    </div>
+  <% end %>
+</div>
