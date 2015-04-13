@@ -13,6 +13,16 @@ module BackgroundText
     Turtle.
   END
 
+  Alice2 = <<-END
+    All the time they were playing the Queen never left off quarrelling with
+    the other players, and shouting 'Off with his head!' or 'Off with her
+    head!' Those whom she sentenced were taken into custody by the soldiers,
+    who of course had to leave off being arches to do this, so that by
+    the end of half an hour or so there were no arches left, and all the
+    players, except the King, the Queen, and Alice, were in custody and
+    under sentence of execution.
+  END
+
   Frank = <<-END
     By the quantity of provision which I had consumed, I should guess that
     I had passed three weeks in this journey; and the continual protraction
@@ -74,7 +84,7 @@ module BackgroundText
     Lord! What will become of me. I shall go distracted.
   END
 
-  All = [Alice, Frank, TwoCities, Pap1, Pap2]
+  All = [Alice, Alice2, Frank, TwoCities, Pap1, Pap2]
 
 end
 
