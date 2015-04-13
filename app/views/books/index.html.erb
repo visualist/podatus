@@ -1,9 +1,17 @@
 <div class="books-page">
   <% @books.each do |book| %>
     <div class="book-item">
-      &ldquo;<%= book.title %>&rdquo;
-      <div class="graph-horizontal">
+      <div class="book-title"><%= book.title %></div>
+
+      <div class="row">
+        <div class="chapter">
+        </div>
+
+        <div class="graph">
+          <!-- horizontal stream graph goes here -->
+        </div>
       </div>
+
     </div>
   <% end %>
 </div>

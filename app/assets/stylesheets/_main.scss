@@ -57,15 +57,37 @@ body {
 
     .book-item {
       margin-top: 30px;
-      margin-left: 30px;
+      margin-left: 8px;
 
-      .graph-horizontal {
-        height: 90px;
-        width: 90%;
-        margin-top: 4px;
-        margin-bottom: 36px;
-        background-color: #404040;
+      .book-title {
+        margin-left: 42px;
+        margin-bottom: 2px;
       }
+
+      .row {
+        margin-bottom: 36px;
+        width: 100%;
+        border: 1px dashed red;
+
+        .chapter {
+          display: inline-block;
+          margin-top: 0;
+          margin-left: 2px;
+          width: 32px;
+          height: 90px;
+          border: 1px solid yellow;
+        }
+
+        .graph {
+          margin-left: 2px;
+          display: inline-block;
+
+          height: 90px;
+          width: 90%;
+          background-color: #404040;
+        }
+      }
+
     }
   }
 
