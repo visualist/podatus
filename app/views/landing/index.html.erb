@@ -3,12 +3,12 @@
     <h2>List of books in this study</h2>
     <ul>
       <% @books.each do |book| %>
-        <li><%= book.title %> by <%= book.author %>, <%= book.published_year %></li>
+        <li>&ldquo;<%= book.title %>&rdquo; by <%= book.author %>, <%= book.published_year %></li>
       <% end %>
     </ul>
   </div>
   <div class="home-right">
-    <p>A textual analysis by parts of speech of e-texts from Gutenberg.</p>
+    <p>A textual analysis by parts of speech of e-texts from Gutenberg &hellip;</p>
     <img width="240px" src="/assets/diagram2.png"/>
   </div>
 </div>
