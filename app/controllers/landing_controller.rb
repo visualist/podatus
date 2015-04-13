@@ -1,7 +1,7 @@
 class LandingController < ApplicationController
   def index
     #@sitename = 'name'
-    @books = [] # TODO: insert Book-model query
+    @books = Book.all.order(:published_year)
   end
 
   def about
