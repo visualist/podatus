@@ -1,28 +1,13 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Podatus is data visualization for literary works, breaking down
+parts of speach, showing the result in streamgraphs.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+As an inchoate Rails project, the usual Rails setups can get to
+the first steps toward running (rake db:migrate), but you'll also
+need to seed the database. For that, a set of rake tasks in the
+'book' namespace exist: find, show, load. See the data directory
+for the book.json file. To load:
+    <tt> rake book:load </tt>
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.

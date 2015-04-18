@@ -1,0 +1,35 @@
+{
+  "books": [
+
+    {
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "published_year": 1813
+    },
+
+    {
+      "title": "Frankenstein",
+      "author": "Mary Shelley",
+      "published_year": 1818
+    },
+
+    {
+      "title": "Alice in Wonderland",
+      "author": "Lewis Carroll",
+      "published_year": 1865
+    },
+
+    {
+      "title": "Tale of Two Cities",
+      "author": "Charles Dickens",
+      "published_year": 1859
+    },
+
+    {
+      "title": "Moby Dick",
+      "author": "Herman Melville",
+      "published_year": 1851
+    }
+
+  ]
+}
