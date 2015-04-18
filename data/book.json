@@ -2,30 +2,38 @@
   "books": [
 
     {
+      "ckey": "pap",
       "title": "Pride and Prejudice",
       "author": "Jane Austen",
       "published_year": 1813
     },
 
     {
+      "ckey": "frank",
       "title": "Frankenstein",
       "author": "Mary Shelley",
-      "published_year": 1818
+      "published_year": 1818,
+      "related_data": {
+         "sentence": "frank-sent.csv"
+      }
     },
 
     {
+      "ckey": "alice",
       "title": "Alice in Wonderland",
       "author": "Lewis Carroll",
       "published_year": 1865
     },
 
     {
+      "ckey": "two-cities",
       "title": "Tale of Two Cities",
       "author": "Charles Dickens",
       "published_year": 1859
     },
 
     {
+      "ckey": "moby-dick",
       "title": "Moby Dick",
       "author": "Herman Melville",
       "published_year": 1851
