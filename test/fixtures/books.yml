@@ -1,11 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  author: MyString
-  published: MyString
+pap:
+  title: Pride and Prejudice
+  author: Jane Austen
+  published_year: 1813
 
-two:
-  title: MyString
-  author: MyString
-  published: MyString
+frank:
+  title: Frankenstein
+  author: Mary Shelley
+  published_year: 1818
+
+alice:
+  title: Alice in Wonderland
+  author: Lewis Carroll
+  published_year: 1865
+
