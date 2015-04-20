@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   get 'about' => 'landing#about'
 
   get 'books' => 'books#index'
-  get 'books/:id' => 'books#show'
-  get 'book/:id' => 'books#show'
+  get 'books/:id' => 'books#show', as: 'onebook'
+  get 'book/:id' => 'books#show', as: 'book'
 
   # TODO: will need a way to get json-based data for a given book or a chapter within
 
