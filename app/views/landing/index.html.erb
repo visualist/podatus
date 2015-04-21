@@ -3,7 +3,7 @@
     <h2>List of books in this study</h2>
     <ul>
       <% @books.each do |book| %>
-        <li>&ldquo;<%= book.title %>&rdquo; by <%= book.author %>, <%= book.published_year %></li>
+        <li><span class="title"><%= book.has_data? ? link_to(book.title, book_path(book)) : book.title %></span> by <%= book.author %>, <%= book.published_year %></li>
       <% end %>
     </ul>
   </div>

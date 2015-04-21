@@ -1,7 +1,7 @@
 <div class="books-page">
   <% @books.each do |book| %>
     <div class="book-item">
-      <div class="book-title"><%= book.has_data? ? link_to(book.title, book_path(book)) : book.title %></div>
+      <div class="book-title"><span class="title"><%= book.has_data? ? link_to(book.title, book_path(book)) : book.title %></span>, <%= book.author %></div>
 
       <div class="row">
         <div class="chapter"><p>2</p>
