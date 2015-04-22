@@ -8,6 +8,7 @@ the first steps toward running (rake db:migrate), but you'll also
 need to seed the database. For that, a set of rake tasks in the
 'book' namespace exist: find, show, load. See the data directory
 for the book.json file. To load:
+
 	<tt>rake book:load</tt>
 	<tt>rake book:sentence</tt>
 
