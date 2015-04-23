@@ -20,6 +20,19 @@ test:
   <<: *default
   database: db/test.sqlite3
 
+#production:
+#  <<: *default
+#  database: db/production.sqlite3
+
+#production:
+#  database: podatus_production
+#  username: podatus
+#  password: <%= ENV['PODATUS_DATABASE_PASSWORD'] %>
+#
+
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  url: <%= ENV['DATABASE_URL'] %>
+
