@@ -26,5 +26,11 @@ class BookTest < ActiveSupport::TestCase
     assert Sentence.create_from_csv_row(book, sent), "sentence not created"
 
     assert book.has_data?, "book should have data now"
+    chapters = book.chapters
+    assert chapters.count==1, "book should have one chapter"
+    chapter = chapters.first
+    sentence = book.sentence_for(chapter)
+    assert sentence.count==1, "book should have one sentence"
   end
+
 end
