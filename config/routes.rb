@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   end
 
   resources :books, only: [:index, :show] do
-    resources :chapter, controller: 'chapters', :path => '/chapter', only: [:index, :show]
+    resources :chapter, controller: 'chapters',
+                        path: '/chapter',
+                        only: [:index, :show],
+                        defaults: { :format => :json }
   end
 
   root 'landing#index'
