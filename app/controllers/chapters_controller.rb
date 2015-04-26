@@ -1,11 +1,23 @@
 class ChaptersController < ApplicationController
+
   def index
-    @background_text = BackgroundText::All.sample
-    @books = Book.all.order(:published_year)
+    @book_id = params[:book_id]
+    @book = Book.find(@book_id)
+    @chapters = @book.chapters
+    respond_to do |format|
+      format.html
+      format.json { render json: @chapters }
+    end
   end
 
   def show
-    @id = params[:id]
-    @book = Book.find(@id)
+    @book_id = params[:book_id]
+    @book = Book.find(@book_id)
+    @chap_id = params[:id]
+    respond_to do |format|
+      format.html
+      format.json { render json: @book }
+    end
   end
+
 end
