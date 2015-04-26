@@ -29,7 +29,7 @@ class BookTest < ActiveSupport::TestCase
     chapters = book.chapters
     assert chapters.count==1, "book should have one chapter"
     chapter = chapters.first
-    sentence = book.sentence_for(chapter)
+    sentence = book.sentences_for(chapter)
     assert sentence.count==1, "book should have one sentence"
   end
 
