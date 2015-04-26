@@ -14,4 +14,10 @@ class Book < ActiveRecord::Base
                  noun verb adj adv con pron punct dt other}.map(&:to_sym)
     sentences.where(chapter: chapter).order(:seq).pluck(*columns)
   end
+
+  def as_json(options = {})
+    json = super(options)
+    json['sentences'] = sentences_for(options[:param_chapter_id])
+    json
+  end
 end

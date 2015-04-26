@@ -13,10 +13,11 @@ class ChaptersController < ApplicationController
   def show
     @book_id = params[:book_id]
     @book = Book.find(@book_id)
-    @chap_id = params[:id]
+    @chapter_id = params[:id]
+    #@sentences = @book.sentences_for(@chap_id)
     respond_to do |format|
       format.html
-      format.json { render json: @book }
+      format.json { render json: @book.as_json(:param_chapter_id => @chapter_id) }
     end
   end
 
