@@ -1,21 +1,21 @@
 
 @font-face {
     font-family: 'kaffeesatz-regular';
-    src: url('/assets/YanoneKaffeesatz-Regular.ttf');
+    src: font_url('YanoneKaffeesatz-Regular.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'kaffeesatz-bold';
-    src: url('/assets/YanoneKaffeesatz-Bold.ttf');
+    src: font_url('YanoneKaffeesatz-Bold.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'kaffeesatz-light';
-    src: url('/assets/YanoneKaffeesatz-Light.ttf');
+    src: font_url('YanoneKaffeesatz-Light.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'kaffeesatz-extralight';
-    src: url('/assets/YanoneKaffeesatz-ExtraLight.ttf');
+    src: font_url('YanoneKaffeesatz-ExtraLight.ttf') format('truetype');
 }
 
