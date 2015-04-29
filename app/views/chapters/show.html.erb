@@ -1,6 +1,18 @@
+<script>
+  var book_id = <%= @book_id %>;
+  var chapter_id = <%= @chapter_id %>;
+  $(document).ready(function() {
+    var options = { book: book_id, chapter: chapter_id,
+                    selector: ".vertical-graph",
+                    width: 740, height: 100
+                  };
+    render_stream_graph(options);
+  });
+</script>
+
 <div class="one-book">
 
-    <h2><span class="title"><%= @book.title %></span>, by <span class="author"><%= @book.author %></span></h2>
+    <h2><span class="title"><%= @book.title %></span>, by <span class="author"><%= @book.author %></span>: chapter <%= @chapter_id %></h2>
 
     <div class="vertical-graph-container">
       <div class="vertical-graph">

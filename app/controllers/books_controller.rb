@@ -11,6 +11,7 @@ class BooksController < ApplicationController
   def show
     @id = params[:id]
     @book = Book.find(@id)
+    @random_chapter_id = @book.chapters.sample
     respond_to do |format|
       format.html
       format.json { render json: @book.as_json(:methods => :chapters) }
