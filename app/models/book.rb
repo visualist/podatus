@@ -9,6 +9,23 @@ class Book < ActiveRecord::Base
     sentences.order(:seq).pluck(:chapter).uniq
   end
 
+  def by_chapter
+    # zero-indexed
+    sentences.select("chapter, max(slen) as max_sent, count(id) as num_sent")
+             .group("chapter").order("seq")
+  end
+
+  def max_chapter_length
+    # .. in terms of number of sentences
+    by_chapter.map(&:num_sent)
+  end
+
+  def max_sentence_length
+    # sql equivalent: select chapter, max(slen) as max_sent from sentences
+    #                 where book_id=2 group by chapter order by seq"
+    by_chapter.map(&:max_sent)
+  end
+
   def sentences_for(chapter)
     columns = %w{seq chapter_seq chapter sentence slen note
                  noun verb adj adv con pron punct dt other}.map(&:to_sym)
