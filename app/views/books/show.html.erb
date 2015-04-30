@@ -1,22 +1,31 @@
 <script>
   var book_id = <%= @id %>;
   var chapter_id = <%= @random_chapter_id %>;
+  /* TODO: fix this suspect way to move data ruby->js */
+  var chapters = <%= raw(@book.chapters.to_json) %>;
   $(document).ready(function() {
-    var options = { book: book_id, chapter: chapter_id,
-                    selector: ".vertical-graph",
-                    width: 740, height: 100
-                  };
-    render_stream_graph(options);
+      chapters.forEach(function(chapter) {
+          var options = { book: book_id, chapter: chapter,
+                          selector: ".vertical-graph-" + chapter,
+                          width: 740, height: 80,
+                          xwidth: 400
+                        };
+          render_stream_graph(options);
+      });
   });
 </script>
 
 <div class="one-book">
 
-    <h2><span class="title"><%= @book.title %></span>, by <span class="author"><%= @book.author %></span>: chapter <%= @random_chapter_id %></h2>
+    <h2><span class="title"><%= @book.title %></span>, by <span class="author"><%= @book.author %></span></h2>
 
     <div class="vertical-graph-container">
-      <div class="vertical-graph">
-      </div>
+      <span class="number-of-chapters"><%= @book.chapters.size %> chapters</span>
+
+      <% @book.chapters.each do |chapter| %>
+        <div class="vertical-graph-<%= chapter %>">
+        </div>
+      <% end %>
       <div class="annotation">
       </div>
     </div>

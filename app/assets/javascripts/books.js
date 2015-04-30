@@ -65,27 +65,40 @@ function render_stream_graph(options) {
     var stack = d3.layout.stack().offset(offset_type);
     var layers0 = stack(data0);
 
-    var x = d3.scale.linear()
-    .domain([
-        d3.min(layers0, function(layer) {
-            return d3.min(layer, function(d) { return d.x; });
-        }),
-        d3.max(layers0, function(layer) {
+    /* calc X and Y axis ranges */
+    var xmin =  options['xmin'] || d3.min(layers0, function(layer) {
+                    return d3.min(layer, function(d) { return d.x; });
+                });
+    var xrangewidth = false;
+    var xwidth = options['xwidth'];
+
+    if (xwidth > 0) {
+        xrangewidth = xwidth + xmin;
+    }
+
+    var xrange = [
+        xmin,
+        xrangewidth || options['xmax'] || d3.max(layers0, function(layer) {
             return d3.max(layer, function(d) { return d.x; });
         })
-    ])
-    .range([0, width]);
+    ];
+
+    var yrange = [
+        options['ymin'] || 0,
+        options['ymax'] || d3.max(layers0, function(layer) {
+            return d3.max(layer, function(d){return d.y0 + d.y; });
+        })
+    ];
+
+    var x = d3.scale.linear()
+              .domain(xrange)
+              .range([0, width]);
 
     var y = d3.scale.linear()
-    .domain([0,
-             d3.max(layers0,
-               function(layer) {
-                 return d3.max(layer, function(d) { return d.y0 + d.y; });
-               }
-             )
-    ])
-    .range([height, 0]);
+              .domain(yrange)
+              .range([height, 0]);
 
+    /* graph */
     var area = d3.svg.area()
                  .x(function(d) { return x(d.x); })
                  .y0(function(d) { return y(d.y0); })
