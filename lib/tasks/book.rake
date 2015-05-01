@@ -59,4 +59,14 @@ require 'csv'
     end
   end
 
+  desc "set availability flag based on having data"
+  task :available => :environment do
+    Book.all.each do |book|
+      next if book.available == book.has_data?
+      puts "#{book.title}: available is #{book.available}, has_data is #{book.has_data?}"
+      book.available = book.has_data?
+      book.save
+    end
+  end
+
 end

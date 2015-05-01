@@ -1,6 +1,10 @@
 class Book < ActiveRecord::Base
   has_many :sentences
 
+  def self.available
+    where(available: true)
+  end
+
   def has_data?
     sentences.count > 0
   end
