@@ -48,6 +48,7 @@ require 'csv'
       book_attr.delete('related_data')
       current_book = Book.where(book_attr).first
       next if current_book.nil?
+      next if current_book.available # skip loading if the book is "done"
 
       if rd.has_key?('sentence')
         csv_pathname = File.join(['data', rd['sentence']])

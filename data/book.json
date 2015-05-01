@@ -5,7 +5,10 @@
       "ckey": "pap",
       "title": "Pride and Prejudice",
       "author": "Jane Austen",
-      "published_year": 1813
+      "published_year": 1813,
+      "related_data": {
+         "sentence": "pap-sent.csv"
+      }
     },
 
     {
@@ -22,7 +25,11 @@
       "ckey": "alice",
       "title": "Alice in Wonderland",
       "author": "Lewis Carroll",
-      "published_year": 1865
+      "published_year": 1865,
+      "related_data": {
+         "sentence": "alice-sent.csv"
+      }
+
     },
 
     {
