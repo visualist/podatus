@@ -17,6 +17,7 @@ $(document).ready(function() {
 </script>
 
 <div class="books-page">
+  <h2>All books: selected chapters</h2>
   <% @books.each do |book| %>
     <div class="book-item">
       <div class="book-title"><span class="title"><%= book.has_data? ? link_to(book.title, book_path(book)) : book.title %></span>, <%= book.author %></div>
