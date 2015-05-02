@@ -1,2 +1,70 @@
-<h1>about</h1>
+<script>
+$(function(){
+    $('h2').addClass("dontend");
+    $('.wide').columnize({
+        columns: 2,
+        lastNeverTallest: true
+    });
+});
+</script>
+<style>
 
+#about-page-content{
+  margin: 40px 120px;
+}
+.column {
+  font-family: 'kaffeesatz-regular';
+}
+.column > *{ padding: 0 20px 0 20px; }
+.column .defn {
+  display:block;
+  margin-top: 8px;
+  font-family: monospace;
+}
+.column .defn .pos {
+  font-style: italic;
+}
+.column .defn .word {
+  font-weight: 700;
+}
+.column a {
+  color: #914949;
+  text-decoration: none;
+}
+.wide {clear:both;}
+</style>
+
+<div id="about-page-content">
+
+  <div class="wide">
+
+
+    <p>Podatus is data visualization for the text of novels. Sentence and parts-of-speech frequencies are plotted by <a href="https://en.wikipedia.org/wiki/Streamgraph">streamgraphs</a>, where thickness in the graph represents frequency. The <a href="https://en.wikipedia.org/wiki/Streamgraph">streamgraphs</a> are oriented either vertically or horizontally depending on the need to scale: the list of all books vs. the details of one book. Ultimately, I don’t know how many books will be added to Podatus, perhaps very many. As for the book-detail page, the vertical orientation leaves room for other layers of information, for notations and the content of the book itself, hopefully enabling further discovery.</p>
+
+    <h2>The Name</h2>
+    <p>The word &lsquo;podatus&rsquo; as defined on <a href="https://www.wordnik.com/words/podatus">Wordnik</a> says this:
+<span class="defn">
+     <span class="word">podatus</span> <span class="pos">n.</span> In medieval musical notation, a ligature which represents an ascending step or skip.
+</span>
+    </p>
+
+    <p>The idea of ascending (or descending) is seen throughout this data. After all, authors are wise to use varying sentence lengths as one of their tools to keep interest and influence the pace of the narrative. Graphically speaking, the <a href="https://en.wikipedia.org/wiki/Streamgraph">streamgraphs</a> of this project are a bit musical (not to mention future hopes of mine to add a more direct musical relationship to this visualization).</p>
+
+    <h2>Motivation</h2>
+    <p>Ever since reading and thoroughly enjoying the works of James Joyce, I am inspired to learn more about the layers of construction in narrative, from basic levels onward. Obviously, this visualization of parts-of-speech begins at the basic level. But I have to start somewhere. It is my hope to keep building on this platform and use it as a tool kit for further studies of the structure of texts, layering parts of speech with mood, meter and meaning.</p>
+
+    <p>One of my early goals of this project was to compare the writing structure across multiple books. Here, I’ve tried to do that with the books-list page, focusing on individual chapters; maybe I will need further focus to do justice to this idea.</p>
+
+    <p>Several sources suggest the pace of action in a narrative is an inverse correlation with sentence length, that, for example,  short sentences strung together make for an increased pace of action in the story. Conversely, longer sentences slow the pace. Ultimately, I want to ask questions about authors of certain genres and time periods. For example, how has the structure of the novel changed over time? How is academic writing look when compared with literature?</p>
+
+    <h2>Technology</h2>
+    <p>Podatus is built with a <a href="http://rubyonrails.org/">Ruby on Rails</a> 4.2 and <a href="http://d3js.org/">D3js</a> for constructing <a href="https://en.wikipedia.org/wiki/Streamgraph">streamgraphs</a> from dynamically-loaded data via JSON. Sentence-based CSV data is constructed using <a href="http://www.nltk.org/">NLTK</a> (Python). The majority of text uses the Kaffeesatz typeface by Yanone and made available for free through Google fonts. The Podatus project source is hosted on <a href="https://github.com/visualist/podatus">Github</a>.</p>
+
+    <h2>Process</h2>
+    <p>The e-texts where chosen from the top-25 downloaded books from <a href="http://www.gutenberg.org/">Gutenberg.org</a>; selecting among these 25, I focused on British authors. The plain text (UTF-8) renditions of the books were downloaded, then marked up by a simple convention to indicate where the book text begins and ends, as well as each of the chapters. Otherwise, preamble and <a href="http://www.gutenberg.org/">Gutenberg</a> licensing language become part of the analysis. The markup also supports other annotation which can later become part of the book’s depiction on the web site. This markup is done manually in a text editor.</p>
+
+    <p>Once downloaded, each book is processed by tools based on <a href="http://www.nltk.org/">NLTK</a>, parsing and finding parts of speech, ultimately creating chapter- and sentence-based CSV data files, which are subsequently loaded into the <a href="http://rubyonrails.org/">
+Rails</a> database.</p>
+
+  </div>
+</div>
