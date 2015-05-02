@@ -1,14 +1,30 @@
+<script>
+
+var book_ids = <%= @books.map(&:id) %>;
+var titles = <%= raw(@books.map(&:title).to_json) %>;
+var start_chapter = <%= start_chapter = 5 %>;
+
+$(document).ready(function() {
+  book_ids.forEach(function(book_id){
+    var options = { book: book_id, chapter: start_chapter,
+                    selector: "#book-" + book_id,
+                    width: 660, height: 90,
+                    xwidth: 100
+                  };
+    render_stream_graph(options);
+  });
+});
+</script>
+
 <div class="books-page">
   <% @books.each do |book| %>
     <div class="book-item">
       <div class="book-title"><span class="title"><%= book.has_data? ? link_to(book.title, book_path(book)) : book.title %></span>, <%= book.author %></div>
 
       <div class="row">
-        <div class="chapter"><p>2</p>
+        <div class="chapter"><p><%= start_chapter %></p>
         </div>
-        <div class="graph">
-          <!-- horizontal stream graph goes here -->
-        </div>
+        <div class="graph" id="book-<%= book.id %>"></div>
         <div class="clearfix"></div>
       </div>
 
