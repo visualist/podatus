@@ -45,6 +45,8 @@ function render_stream_graph(options) {
       height = options['height'],
       offset_type = options['offset_type'] || "silhouette";
 
+  $(css_selector).empty();
+
   d3.json(request_url, function(err, data){
 
     var delta = 1; // hack- when the data shifts a column or so
@@ -133,18 +135,15 @@ var streamgraph = function(book, chapter) {
     var selector = "#book-" + book;
     var options = { book: book, chapter: chapter,
                     selector: selector,
+                    peer_chapter_selection: ".chapter p",
                     width: 660, height: 90,
                     xwidth: 100
                   };
     render_stream_graph(options);
-/*
-// this is still experimental..
-    var chapter_number_element = $(selector).parent().find('.chapter p');
-    var x = parseInt(chapter_number_element.html());
-    //console.log('x:');
-    //console.log(x);
-    //var x = parseInt(chapter_number_element.html(x+1));
-*/
+    var psel = options['peer_chapter_selection'];
+    var chapter_number_element = $(selector).parent().find(psel);
+    //var chapter_number = parseInt(chapter_number_element.html());
+    chapter_number_element.html(chapter);
 }
 
 // add jquery function for toggling click events (books-index page)
