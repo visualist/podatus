@@ -48,26 +48,10 @@ $(document).ready(function() {
           console.log(e.which);
           //console.log('up: book=' + book + ', chapter=' + chapter);
           var bookGraph = bookGraphs[book-1]; // HACK!
-          switch (e.which) {
-            case 40: //down
-              chapter = chapter - 1;
-              if (chapter < 1) {
-                chapter = 1;
-              }
-              break;
-            case 38: //up
-              chapter = chapter + 1;
-              var max = bookGraph.last_chapter;
-              if (chapter > max) {
-                chapter = max;
-              }
-              break;
-            case 48: //0
-            case 49: //1
-              chapter = 1;
-              break;
+          chapter = keycode_functions(e.which, chapter, 1, bookGraph.last_chapter);
+          if (chapter) {
+              bookGraph.graph.render_chapter(chapter);
           }
-          bookGraph.graph.render_chapter(chapter);
       });
   }, function(){
       var $this = $(this);

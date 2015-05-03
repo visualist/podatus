@@ -143,7 +143,55 @@ var streamgraph = function(book, chapter) {
     var psel = options['peer_chapter_selection'];
     var chapter_number_element = $(selector).parent().find(psel);
     //var chapter_number = parseInt(chapter_number_element.html());
+    //chapter_number_element.data('book', book);
     chapter_number_element.html(chapter);
+}
+
+var keycode_functions = function(keycode, prev_chapter,
+                                 first_chapter, last_chapter) {
+    console.log('keycode='+prev_chapter);
+    var chapter = null,
+        min = first_chapter,
+        max = last_chapter;
+    switch (keycode) {
+      case 37: // left-arrow
+      case 40: // down-arrow
+      case 74: // j (vi down)
+      case 80: // p (previous)
+          chapter = prev_chapter - 1;
+          if (chapter < min) {
+            chapter = min;
+          }
+              break;
+      case 39: // right-arup-arrowrow
+      case 38: // up-arrow
+      case 75: // k (vi up)
+      case 78: // n (next)
+          chapter = prev_chapter + 1;
+          if (chapter > max) {
+            chapter = max;
+          }
+          break;
+      case 48: // 0
+      case 76: // l (last)
+            chapter = max;
+            break;
+
+      case 77: // m (middle)
+            chapter = Math.floor((min + max) / 2);
+            break;
+
+      case 49: chapter = 1; break; // 1
+      case 50: chapter = 2; break; // 2
+      case 51: chapter = 3; break; // 3
+      case 52: chapter = 4; break; // 4
+      case 53: chapter = 5; break; // 5
+      case 54: chapter = 6; break; // 6
+      case 55: chapter = 7; break; // 7
+      case 56: chapter = 8; break; // 8
+      case 57: chapter = 9; break; // 9
+    }
+    return chapter;
 }
 
 // add jquery function for toggling click events (books-index page)
@@ -153,11 +201,11 @@ $.fn.clicktoggle = function(a, b) {
         $(this).on('click', function() {
             if (clicked) {
                 clicked = false;
-                console.log('B apply')
+                //console.log('B apply')
                 return b.apply(this, arguments);
             }
             clicked = true;
-            console.log('A apply')
+            //console.log('A apply')
             return a.apply(this, arguments);
         });
     });
