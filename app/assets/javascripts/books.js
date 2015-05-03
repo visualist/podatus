@@ -129,27 +129,21 @@ function render_stream_graph(options) {
   });
 }
 
-
-
-/*
+$(document).ready(function() {
   $(document).on("mouseenter", ".pos-hover", function(e) {
-      var pos = $(this).data('pos');
+      var $this = $(this);
+      $this.siblings(".pos-hover").css("opacity", 0.2);
+      $this.css("opacity", 1);
+      //var pos = $this.data('pos');
       // placeholder for tooltip ON
-      console.log(pos + '-on');
+      //console.log(pos + '-on');
 
   }).on('mouseleave', '.pos-hover', function() {
-      var pos = $(this).data('pos');
+      var $this = $(this);
+      $this.siblings(".pos-hover").css("opacity", 1);
+      //var pos = $this.data('pos');
       // placeholder for tooltip OFF
-      console.log(pos + '-off');
-  });
-*/
-
-/*
-$(document).ready(function() {
-  render_stream_graph({ book: 2, chapter: 2,
-          selector: ".vertical-graph",
-          width: 740, height: 100
+      //console.log(pos + '-off');
   });
 });
 
-*/
