@@ -137,10 +137,30 @@ var streamgraph = function(book, chapter) {
                     xwidth: 100
                   };
     render_stream_graph(options);
+/*
+// this is still experimental..
     var chapter_number_element = $(selector).parent().find('.chapter p');
     var x = parseInt(chapter_number_element.html());
     //console.log('x:');
     //console.log(x);
     //var x = parseInt(chapter_number_element.html(x+1));
+*/
 }
+
+// add jquery function for toggling click events (books-index page)
+$.fn.clicktoggle = function(a, b) {
+    return this.each(function() {
+        var clicked = false;
+        $(this).on('click', function() {
+            if (clicked) {
+                clicked = false;
+                console.log('B apply')
+                return b.apply(this, arguments);
+            }
+            clicked = true;
+            console.log('A apply')
+            return a.apply(this, arguments);
+        });
+    });
+};
 

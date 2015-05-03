@@ -4,37 +4,6 @@ var book_ids = <%= @books.map(&:id) %>;
 var titles = <%= raw(@books.map(&:title).to_json) %>;
 var start_chapter = <%= start_chapter = 5 %>;
 
-$.fn.clicktoggle = function(a, b) {
-    return this.each(function() {
-        var clicked = false;
-        $(this).on('click', function() {
-            if (clicked) {
-                clicked = false;
-                console.log('B apply')
-                return b.apply(this, arguments);
-            }
-            clicked = true;
-            console.log('A apply')
-            return a.apply(this, arguments);
-        });
-    });
-};
-
-// TODO: move this elsewhere, this doesn't seem like the right place.
-$(document).ready(function() {
-  // specific to the books-list page:
-  $(document).on("mouseenter", ".pos-hover", function(e) {
-      var $this = $(this);
-      $this.siblings(".pos-hover").css("opacity", 0.2);
-      $this.css("opacity", 1);
-  }).on("mouseleave", ".pos-hover", function() {
-      var $this = $(this);
-      $this.siblings(".pos-hover").css("opacity", 1);
-  });
-});
-
-
-
 $(document).ready(function() {
   book_ids.forEach(function(book_id){
     streamgraph(book_id, start_chapter);
@@ -46,6 +15,15 @@ $(document).ready(function() {
   }, function(){
       var $this = $(this);
       $this.css('color', '#b0b0b0'); //normal
+  });
+
+  $(document).on("mouseenter", ".pos-hover", function(e) {
+      var $this = $(this);
+      $this.siblings(".pos-hover").css("opacity", 0.2);
+      $this.css("opacity", 1);
+  }).on("mouseleave", ".pos-hover", function() {
+      var $this = $(this);
+      $this.siblings(".pos-hover").css("opacity", 1);
   });
 });
 </script>
