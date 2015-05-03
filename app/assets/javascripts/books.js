@@ -129,15 +129,18 @@ function render_stream_graph(options) {
   });
 }
 
-$(document).ready(function() {
-  // specific to the books-list page:
-  $(document).on("mouseenter", ".pos-hover", function(e) {
-      var $this = $(this);
-      $this.siblings(".pos-hover").css("opacity", 0.2);
-      $this.css("opacity", 1);
-  }).on("mouseleave", ".pos-hover", function() {
-      var $this = $(this);
-      $this.siblings(".pos-hover").css("opacity", 1);
-  });
-});
+var streamgraph = function(book, chapter) {
+    var selector = "#book-" + book;
+    var options = { book: book, chapter: chapter,
+                    selector: selector,
+                    width: 660, height: 90,
+                    xwidth: 100
+                  };
+    render_stream_graph(options);
+    var chapter_number_element = $(selector).parent().find('.chapter p');
+    var x = parseInt(chapter_number_element.html());
+    //console.log('x:');
+    //console.log(x);
+    //var x = parseInt(chapter_number_element.html(x+1));
+}
 
