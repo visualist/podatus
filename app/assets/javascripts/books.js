@@ -130,20 +130,14 @@ function render_stream_graph(options) {
 }
 
 $(document).ready(function() {
+  // specific to the books-list page:
   $(document).on("mouseenter", ".pos-hover", function(e) {
       var $this = $(this);
       $this.siblings(".pos-hover").css("opacity", 0.2);
       $this.css("opacity", 1);
-      //var pos = $this.data('pos');
-      // placeholder for tooltip ON
-      //console.log(pos + '-on');
-
-  }).on('mouseleave', '.pos-hover', function() {
+  }).on("mouseleave", ".pos-hover", function() {
       var $this = $(this);
       $this.siblings(".pos-hover").css("opacity", 1);
-      //var pos = $this.data('pos');
-      // placeholder for tooltip OFF
-      //console.log(pos + '-off');
   });
 });
 
