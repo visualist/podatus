@@ -21,9 +21,9 @@ $(document).ready(function() {
           graph: new HorizontalStreamgraph({book: book_id, selection: selctr})
       };
       $.get(req_url, function(d) {
-          console.log('ajax data returned:');
-          console.log(d.chapters);
-          console.log(x);
+          //console.log('ajax data returned:');
+          //console.log(d.chapters);
+          //console.log(x);
           x['chapters'] = d.chapters;
           x['last_chapter'] = d.last_chapter;
       });
@@ -45,7 +45,7 @@ $(document).ready(function() {
       $this.on('keydown', function(e) {
           var chapter = parseInt($this.html());
           var book = $this.data('book');
-          console.log(e.which);
+          //console.log(e.which);
           //console.log('up: book=' + book + ', chapter=' + chapter);
           var bookGraph = bookGraphs[book-1]; // HACK!
           chapter = keycode_functions(e.which, chapter, 1, bookGraph.last_chapter);

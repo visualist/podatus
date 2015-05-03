@@ -149,7 +149,7 @@ var streamgraph = function(book, chapter) {
 
 var keycode_functions = function(keycode, prev_chapter,
                                  first_chapter, last_chapter) {
-    console.log('keycode='+prev_chapter);
+    //console.log('keycode='+prev_chapter);
     var chapter = null,
         min = first_chapter,
         max = last_chapter;
