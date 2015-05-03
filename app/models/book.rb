@@ -13,6 +13,11 @@ class Book < ActiveRecord::Base
     sentences.order(:seq).pluck(:chapter).uniq
   end
 
+  def last_chapter
+    # TODO: handle the case with non-numeric chapters
+    chapters.map{|ch| ch.to_i}.max
+  end
+
   def by_chapter
     # zero-indexed
     sentences.select("chapter, max(slen) as max_sent, count(id) as num_sent")
