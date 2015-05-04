@@ -12,7 +12,7 @@ var keypress_handler = function(e) {
     var bookGraph = bookGraphs[book-1]; // HACK!
     chapter = keycode_functions(e.which, chapter, 1, bookGraph.last_chapter);
     if (chapter) {
-        console.log('calling render_chapter for ' + chapter);
+        //console.log('calling render_chapter for ' + chapter);
         bookGraph.graph.render_chapter(chapter);
         var key = "book" + book + "c";
         basil.set(key, chapter);
