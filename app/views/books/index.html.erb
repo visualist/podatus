@@ -29,8 +29,14 @@ $(document).ready(function() {
       });
       return x;
   });
+  basil = new window.Basil();
   bookGraphs.forEach(function(book){
-      book.graph.render_chapter(4);
+      var key = "book" + book.book + "c",
+          chap = 3;
+      if (basil.get(key)) {
+         chap = basil.get(key);
+      }
+      book.graph.render_chapter(chap);
   });
 
   $(".chapter p").clicktoggle(function(){
@@ -51,6 +57,8 @@ $(document).ready(function() {
           chapter = keycode_functions(e.which, chapter, 1, bookGraph.last_chapter);
           if (chapter) {
               bookGraph.graph.render_chapter(chapter);
+              var key = "book" + book + "c";
+              basil.set(key, chapter);
           }
       });
   }, function(){
