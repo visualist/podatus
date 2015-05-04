@@ -5,6 +5,18 @@ var titles = <%= raw(@books.map(&:title).to_json) %>;
 var start_chapter = <%= start_chapter = 5 %>;
 var bookGraphs;
 
+
+// an aesthetic experiment: (this is called initially, and on chapter#-adjustment)
+var set_chapter_font_size = function(chapter, element) {
+    var fontsize = 200;
+    if (chapter > 9) {
+        fontsize = 150;
+    }
+    console.log("Set chapter(" + chapter + ") font-size: " + fontsize + "%");
+    console.log(element);
+    element.css("font-size", fontsize + "%");
+}
+
 var keypress_handler = function(e) {
     var elem = $(e.target);
     var chapter = parseInt(elem.html());
@@ -12,7 +24,7 @@ var keypress_handler = function(e) {
     var bookGraph = bookGraphs[book-1]; // HACK!
     chapter = keycode_functions(e.which, chapter, 1, bookGraph.last_chapter);
     if (chapter) {
-        //console.log('calling render_chapter for ' + chapter);
+        set_chapter_font_size(chapter, elem);
         bookGraph.graph.render_chapter(chapter);
         var key = "book" + book + "c";
         basil.set(key, chapter);
@@ -26,6 +38,8 @@ $(document).ready(function() {
       var x = {
           book: book_id,
           index: i,
+          //chapter_selector_jq: $(selctr).parent().parent().find(".chapter p"),
+          graph_selector: selctr,
           graph: new HorizontalStreamgraph({book: book_id, selection: selctr})
       };
       $.get(req_url, function(d) {
@@ -44,6 +58,7 @@ $(document).ready(function() {
       if (basil.get(key)) {
          chap = basil.get(key);
       }
+      set_chapter_font_size(chap, $(book.graph_selector).parent().find(".chapter p"));
       book.graph.render_chapter(chap);
   });
 
