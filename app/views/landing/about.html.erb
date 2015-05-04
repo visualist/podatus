@@ -1,10 +1,74 @@
 <script>
-$(function(){
+var Footnotes = {
+    footnotetimeout: false,
+    setup: function() {
+        var footnotelinks = $("a[rel='footnote']")
+        
+        footnotelinks.unbind('mouseover',Footnotes.footnoteover);
+        footnotelinks.unbind('mouseout',Footnotes.footnoteoout);
+        
+        footnotelinks.bind('mouseover',Footnotes.footnoteover);
+        footnotelinks.bind('mouseout',Footnotes.footnoteoout);
+    },
+    footnoteover: function() {
+        clearTimeout(Footnotes.footnotetimeout);
+        $('#footnotediv').stop();
+        $('#footnotediv').remove();
+        
+        var id = $(this).attr('href').substr(1);
+        var position = $(this).offset();
+    
+        var div = $(document.createElement('div'));
+        div.attr('id','footnotediv');
+        div.bind('mouseover',Footnotes.divover);
+        div.bind('mouseout',Footnotes.footnoteoout);
+
+        var el = document.getElementById(id);
+        div.html($(el).html());
+        
+        div.css({
+            position:'absolute',
+            width:'400px',
+            opacity:0.9
+        });
+        $(document.body).append(div);
+
+        var left = position.left;
+        if(left + 420  > $(window).width() + $(window).scrollLeft())
+            left = $(window).width() - 420 + $(window).scrollLeft();
+        var top = position.top+20;
+        if(top + div.height() > $(window).height() + $(window).scrollTop())
+            top = position.top - div.height() - 15;
+        div.css({
+            left:left,
+            top:top
+        });
+    },
+    footnoteoout: function() {
+        Footnotes.footnotetimeout = setTimeout(function() {
+            $('#footnotediv').animate({
+                opacity: 0
+            }, 600, function() {
+                $('#footnotediv').remove();
+            });
+        },100);
+    },
+    divover: function() {
+        clearTimeout(Footnotes.footnotetimeout);
+        $('#footnotediv').stop();
+        $('#footnotediv').css({
+                opacity: 0.9
+        });
+    }
+}
+
+$(document).ready(function() {
     $('h2').addClass("dontend");
     $('.wide').columnize({
         columns: 2,
         lastNeverTallest: true
     });
+    Footnotes.setup();
 });
 </script>
 <style>
@@ -32,6 +96,29 @@ $(function(){
   text-decoration: none;
 }
 .wide {clear:both;}
+
+.footnotes {
+  border-top: 1px solid #404040;
+  margin: 20px 1em;
+}
+#footnotediv {
+  background-color: #303030;
+  opacity: .7;
+}
+#footnotediv, .footnotes {
+  padding-left: 2em;
+  color: #b0b0b0;
+  font-family: monospace;
+  font-size: 70%;
+}
+#footnotediv a, .footnotes a {
+  text-decoration: none;
+  font-weight: 700;
+  color: #914949;
+}
+#footnotediv a:hover, .footnotes a:hover {
+  color: blue;
+}
 </style>
 
 <div id="about-page-content">
@@ -51,11 +138,17 @@ $(function(){
     <p>The idea of ascending (or descending) is seen throughout this data. After all, authors are wise to use varying sentence lengths as one of their tools to keep interest and influence the pace of the narrative. Graphically speaking, the <a href="https://en.wikipedia.org/wiki/Streamgraph">streamgraphs</a> of this project are a bit musical (not to mention future hopes of mine to add a more direct musical relationship to this visualization).</p>
 
     <h2>Motivation</h2>
-    <p>Ever since reading and thoroughly enjoying the works of James Joyce, I am inspired to learn more about the layers of construction in narrative, from basic levels onward. Obviously, this visualization of parts-of-speech begins at the basic level. But I have to start somewhere. It is my hope to keep building on this platform and use it as a tool kit for further studies of the structure of texts, layering parts of speech with mood, meter and meaning.</p>
+    <p>Ever since reading and thoroughly enjoying the works of James Joyce
+<sup id="fnref:finnegans">
+  <a href="#fn:finnegans" rel="footnote">1</a>
+</sup>, I am inspired to learn more about the layers of construction in narrative, from basic levels onward. Obviously, this visualization of parts-of-speech begins at the basic level. But I have to start somewhere. It is my hope to keep building on this platform and use it as a tool kit for further studies of the structure of texts, layering parts of speech with mood, meter and meaning.</p>
 
     <p>One of my early goals of this project was to compare the writing structure across multiple books. Here, I’ve tried to do that with the books-list page, focusing on individual chapters; maybe I will need further focus to do justice to this idea.</p>
 
-    <p>Several sources suggest the pace of action in a narrative is an inverse correlation with sentence length, that, for example,  short sentences strung together make for an increased pace of action in the story. Conversely, longer sentences slow the pace. Ultimately, I want to ask questions about authors of certain genres and time periods. For example, how has the structure of the novel changed over time? How is academic writing look when compared with literature?</p>
+    <p>Several sources
+<sup id="fnref:sentencelength">
+  <a href="#fn:sentencelength" rel="footnote">2</a>
+</sup>suggest the pace of action in a narrative is an inverse correlation with sentence length, that, for example,  short sentences strung together make for an increased pace of action in the story. Conversely, longer sentences slow the pace. Ultimately, I want to ask questions about authors of certain genres and time periods. For example, how has the structure of the novel changed over time? How is academic writing look when compared with literature?</p>
 
     <h2>Technology</h2>
     <p>Podatus is built with a <a href="http://rubyonrails.org/">Ruby on Rails</a> 4.2 and <a href="http://d3js.org/">D3js</a> for constructing <a href="https://en.wikipedia.org/wiki/Streamgraph">streamgraphs</a> from dynamically-loaded data via JSON. Sentence-based CSV data is constructed using <a href="http://www.nltk.org/">NLTK</a> (Python). The majority of text uses the Kaffeesatz typeface by Yanone and made available for free through Google fonts. The Podatus project source is hosted on <a href="https://github.com/visualist/podatus">Github</a>.</p>
@@ -66,5 +159,23 @@ $(function(){
     <p>Once downloaded, each book is processed by tools based on <a href="http://www.nltk.org/">NLTK</a>, parsing and finding parts of speech, ultimately creating chapter- and sentence-based CSV data files, which are subsequently loaded into the <a href="http://rubyonrails.org/">
 Rails</a> database.</p>
 
+    <p>&nbsp; &nbsp; &nbsp; &mdash;Wade Stebbings</p>
   </div>
+
+
+<div class="footnotes">
+  <ol>
+
+    <li id="fn:finnegans">
+<p>Coincidentally, the word podatus is <a href="http://www.finwake.com/1024chapter5/1024finn5.htm">found</a> in Joyce's Finnegans Wake, chapter 5.&nbsp;<a class="footnotebacklink" href="#fnref:finnegans" rev="footnote"><img alt="back" src="/undo-arrow-icon-10b.png"></a></p>
+</li>
+
+    <li id="fn:sentencelength">
+      <p>
+For example, see <a href="http://www.robboley.com/sentence-length-scene-pacing/">Sentence length and pacing</a>, Long sentences <a href="http://www.writeenglish.org/writing-tips/slowing-pace-story-long-sentences/">slow the pace</a>.&nbsp;<a class="footnotebacklink" href="#fnref:sentencelength" rev="footnote"><img alt="back" src="/undo-arrow-icon-10b.png"></a></p>
+</li>
+
+  </ol>
+</div>
+
 </div>
