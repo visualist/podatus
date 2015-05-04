@@ -5,13 +5,21 @@ var titles = <%= raw(@books.map(&:title).to_json) %>;
 var start_chapter = <%= start_chapter = 5 %>;
 var bookGraphs;
 
-$(document).ready(function() {
-/*
-  book_ids.forEach(function(book_id){
-    streamgraph(book_id, start_chapter);
-  });
-*/
+var keypress_handler = function(e) {
+    var elem = $(e.target);
+    var chapter = parseInt(elem.html());
+    var book = elem.data('book');
+    var bookGraph = bookGraphs[book-1]; // HACK!
+    chapter = keycode_functions(e.which, chapter, 1, bookGraph.last_chapter);
+    if (chapter) {
+        console.log('calling render_chapter for ' + chapter);
+        bookGraph.graph.render_chapter(chapter);
+        var key = "book" + book + "c";
+        basil.set(key, chapter);
+    }
+}
 
+$(document).ready(function() {
   bookGraphs = $.map(book_ids, function(book_id, i){
       var selctr = "#book-" + book_id;
       var req_url = "/book/" + book_id + ".json" // => obj['chapters']
@@ -40,32 +48,26 @@ $(document).ready(function() {
   });
 
   $(".chapter p").clicktoggle(function(){
+      //console.log('Toggle ON');
       var $this = $(this);
+
       var $peers = $this.parent().parent().parent().parent().find('.chapter p');
       $peers.css('color', '#b0b0b0');
+      $peers.blur();
+
       $this.css('color', '#8080c0');
       $this.css('outline', 'none');
       $this.attr('tabindex', 1);
       $this.focus();
-      // console.log('red');
-      $this.on('keydown', function(e) {
-          var chapter = parseInt($this.html());
-          var book = $this.data('book');
-          //console.log(e.which);
-          //console.log('up: book=' + book + ', chapter=' + chapter);
-          var bookGraph = bookGraphs[book-1]; // HACK!
-          chapter = keycode_functions(e.which, chapter, 1, bookGraph.last_chapter);
-          if (chapter) {
-              bookGraph.graph.render_chapter(chapter);
-              var key = "book" + book + "c";
-              basil.set(key, chapter);
-          }
-      });
+
+      $this.on('keydown', keypress_handler);
+
   }, function(){
+      //console.log('Toggle OFF');
       var $this = $(this);
       $this.css('color', '#b0b0b0'); //normal
+      $this.off('keydown'); // , keypress_handler);
       $this.blur();
-      $this.off('keypress');
   });
 
   $(document).on("mouseenter", ".pos-hover", function(e) {
