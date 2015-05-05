@@ -1,14 +1,21 @@
-<div class="home-page">
-  <div class="home-left">
-    <h2>List of books in this study</h2>
-    <ul>
-      <% @books.each do |book| %>
-        <li><span class="title"><%= book.has_data? ? link_to(book.title, book_path(book)) : book.title %></span> by <%= book.author %>, <%= book.published_year %></li>
-      <% end %>
-    </ul>
-  </div>
-  <div class="home-right">
-    <p>A textual analysis by parts of speech of e-texts from Gutenberg &hellip;</p>
-    <img width="240px" src="<%= image_path 'diagram2.png' %>">
+<div id="home-page-content">
+  <div class="wide">
+
+    <div class="home-left column">
+      <h2>List of books in this study</h2>
+      <ul>
+        <% @books.each do |book| %>
+          <li><span class="title"><%= book.has_data? ? link_to(book.title, book_path(book)) : book.title %></span> by <%= book.author %>, <%= book.published_year %></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="home-right column">
+      <h2>Legend</h2>
+      <p>A textual analysis by parts of speech of e-texts from Gutenberg &hellip;</p>
+      <img width="240px" src="<%= image_path 'diagram2.png' %>">
+    </div>
+
+    <br class="clearfix">
   </div>
 </div>

@@ -28,40 +28,29 @@ body {
     }
   }
 
-  .home-page {
-
-    margin-top: 90px;
-    margin-left: 2.0em;
+  #home-page-content {
     font-family: 'kaffeesatz-regular';
     font-size: 100%;
+    margin: 40px 120px;
 
     .home-left {
+      ul {
+          line-height: 2.2;
+          list-style-type: none;
+      }
+    }
+    .column {
+      display: block;
+      width: 50%;
       float: left;
-      width: 40%;
-      min-width: 300px;
-
-      margin-top: 0px;
-      margin-left: 0px;
-
-      h2 {
-        margin-left: 1.8em;
-        margin-bottom: 36px;
-      }
-      li {
-        display: block;
-        margin-left: 5px;
-        margin-right: 5px;
-        line-height: 2.2;
-      }
-
     }
 
-    .home-right {
-      float: left;
-      width: 40%;
-      min-width: 300px;
-      margin-top: 12px;
-      margin-left: 2.0em;
+    .column > * {
+      padding: 0 20px;
+    }
+    .column h2 {
+      font-size: 1.5em;
+      font-weight: bold;
     }
 
   }
