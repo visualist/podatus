@@ -18,15 +18,19 @@
           var ypos = e.pageY - 60;
           var $this = $(this);
           var sent_number = $this.data("sn");
-          $("#hover-container").css("top", ypos)
+          var req_url = "/book/" + book_id + "/sentence/" + sent_number + ".json"
+          $.get(req_url, function(d) {
+              var content = sent_number + ". (" + d.slen + ") " + d.text;
+              $("#hover-container").css("top", ypos)
                                .css("left", "320px")
                                .css("min-width", "240px")
                                .css("visibility", "visible")
-                               .html(sent_number);
+                               .html(content);
+          });
 
       }).on("mouseleave", ".line-hover", function() {
           var $this = $(this);
-          $("#hover-container").css("visibility", "none").css("left", "-900px");
+          $("#hover-container").css("visibility", "hidden").css("left", "-9000px");
       });
 
   });
@@ -35,8 +39,8 @@
 <style>
   #hover-container {
     position: absolute;
-    left: -900px;
-    visibility: none;
+    left: -9000px;
+    visibility: hidden;
     border: 1px solid #b0b0b0;
     padding: 5px;
   }
