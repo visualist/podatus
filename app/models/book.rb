@@ -9,6 +9,10 @@ class Book < ActiveRecord::Base
     sentences.count > 0
   end
 
+  def sentence_count
+    sentences.count
+  end
+
   def chapters
     sentences.order(:seq).pluck(:chapter).uniq
   end
@@ -35,6 +39,12 @@ class Book < ActiveRecord::Base
     by_chapter.map(&:max_sent)
   end
 
+  def sentences_for_all
+    columns = %w{seq chapter_seq chapter sentence slen note
+                 noun verb adj adv con pron punct dt other}.map(&:to_sym)
+    sentences.order(:seq).pluck(*columns)
+  end
+
   def sentences_for(chapter)
     columns = %w{seq chapter_seq chapter sentence slen note
                  noun verb adj adv con pron punct dt other}.map(&:to_sym)
@@ -43,7 +53,11 @@ class Book < ActiveRecord::Base
 
   def as_json(options = {})
     json = super(options)
-    json['sentences'] = sentences_for(options[:param_chapter_id])
+    if options[:param_chapter_id]=="all"
+       json['sentences'] = sentences_for_all
+    else
+       json['sentences'] = sentences_for(options[:param_chapter_id])
+    end
     json
   end
 end
