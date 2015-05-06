@@ -4,11 +4,16 @@
   $(document).ready(function() {
     var options = { book: book_id, chapter: chapter_id,
                     selector: ".vertical-graph",
-                    width: 740, height: 100
+                    width: 120, height: 400
                   };
-    render_stream_graph(options);
+    render_vstream_graph(options);
   });
 </script>
+<style>
+  .vertical-graph {
+    margin-left: 160px;
+  }
+</style>
 
 <div class="one-book">
 
