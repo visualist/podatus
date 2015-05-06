@@ -29,7 +29,9 @@ class ChaptersController < ApplicationController
     @sentence = @book.sentence(@sentence_id)
     respond_to do |format|
       format.html
-      format.json { render json: @sentence.as_json(:except => [:created_at, :updated_at]) }
+      format.json { render json: @sentence.as_json(
+                                           :methods => :pos_as_json,
+                                           :except => [:pos, :created_at, :updated_at])}
     end
   end
 
