@@ -15,12 +15,14 @@
   });
 </script>
 
-<div class="one-book">
+<div id="book-detail-content">
 
+  <div class="header">
     <h2><span class="title"><%= @book.title %></span>, by <span class="author"><%= @book.author %></span></h2>
+    <span class="number-of-chapters"><%= @book.chapters.size %> chapters</span>
+  </div>
 
-    <div class="vertical-graph-container">
-      <span class="number-of-chapters"><%= @book.chapters.size %> chapters</span>
+  <div class="vertical-graph-container">
 
       <% @book.chapters.each do |chapter| %>
         <div class="vertical-graph-<%= chapter %>">
@@ -28,6 +30,7 @@
       <% end %>
       <div class="annotation">
       </div>
-    </div>
+
+  </div>
 
 </div>

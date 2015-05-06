@@ -111,6 +111,23 @@ body {
     }
   }
 
+  #book-detail-content {
+    font-family: 'kaffeesatz-regular';
+    .header {
+      margin-left: 20px;
+      margin-bottom: 30px;
+      line-height: 1.0;
+      h2 {
+        display: block;
+      }
+      .number-of-chapters {
+        margin: 0;
+      }
+    }
+
+
+  }
+
 }
 
 #back-text {
