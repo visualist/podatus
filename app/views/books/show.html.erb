@@ -15,12 +15,20 @@
       render_vstream_graph(options);
 
       $(document).on("mouseenter", ".line-hover", function(e) {
-          var ypos = e.pageY - 60;
+          var ypos = e.pageY - 62;
           var $this = $(this);
           var sent_number = $this.data("sn");
           var req_url = "/book/" + book_id + "/sentence/" + sent_number + ".json"
           $.get(req_url, function(d) {
-              var content = sent_number + ". " + d.text + " (" + d.slen + "&nbsp;words)";
+
+/* TODO: details to be worked out..
+              var _j = JSON.parse(d.pos_as_json);
+              var text = _j.map(function(w){
+                  return w[0];
+              }).join(' ');
+*/
+              var content = sent_number + ". " + d.text;
+                                     /* + " (" + d.slen + "&nbsp;words)";*/
               $("#hover-container").css("top", ypos)
                                .css("left", "320px")
                                .css("min-width", "240px")
@@ -43,7 +51,9 @@
     left: -1000px;
     visibility: hidden;
     border: 1px solid #b0b0b0;
-    padding: 5px;
+    padding: 6px 6px 9px 10px;
+    color: #202020;
+    background-color: #b0b0b0;
   }
   #vertical-graph-all {
     margin-left: 160px;
