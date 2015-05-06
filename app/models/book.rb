@@ -9,6 +9,10 @@ class Book < ActiveRecord::Base
     sentences.count > 0
   end
 
+  def sentence(id)
+    sentences.where(sentence: id).first
+  end
+
   def sentence_count
     sentences.count
   end

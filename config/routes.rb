@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'landing/about'
   get 'about' => 'landing#about'
 
+  get 'book/:book_id/sentence/:id' => 'chapters#sentence'
+
 # get 'books' => 'books#index'
 # get 'books/:id' => 'books#show', as: 'onebook'
 # get 'book/:id' => 'books#show', as: 'book'
