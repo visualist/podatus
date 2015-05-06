@@ -3,17 +3,52 @@
   var chapter_id = <%= @random_chapter_id %>;
   /* TODO: fix this suspect way to move data ruby->js */
   var chapters = <%= raw(@book.chapters.to_json) %>;
+  var sentence_count = <%= @book.sentence_count %>,
+      pixels_per_sentence = 3,
+      graph_height = (pixels_per_sentence * sentence_count);
+
   $(document).ready(function() {
-      chapters.forEach(function(chapter) {
-          var options = { book: book_id, chapter: chapter,
-                          selector: ".vertical-graph-" + chapter,
-                          width: 740, height: 80,
-                          xwidth: 400
+      var options = { book: book_id, chapter: 'all',
+                          selector: "#vertical-graph-all",
+                          width: 160, height: graph_height
                         };
-          render_stream_graph(options);
+      render_vstream_graph(options);
+
+      $(document).on("mouseenter", ".line-hover", function(e) {
+          var ypos = e.pageY - 60;
+          var $this = $(this);
+          var sent_number = $this.data("sn");
+          $("#hover-container").css("top", ypos)
+                               .css("left", "320px")
+                               .css("min-width", "240px")
+                               .css("visibility", "visible")
+                               .html(sent_number);
+
+      }).on("mouseleave", ".line-hover", function() {
+          var $this = $(this);
+          $("#hover-container").css("visibility", "none").css("left", "-900px");
       });
+
   });
 </script>
+
+<style>
+  #hover-container {
+    position: absolute;
+    left: -900px;
+    visibility: none;
+    border: 1px solid #b0b0b0;
+    padding: 5px;
+  }
+  #vertical-graph-all {
+    margin-left: 160px;
+    margin-bottom: 40px;
+  }
+  line:hover {
+    stroke: #b0b0b0;
+    opacity: 1;
+  }
+</style>
 
 <div id="book-detail-content">
 
@@ -23,14 +58,12 @@
   </div>
 
   <div class="vertical-graph-container">
-
-      <% @book.chapters.each do |chapter| %>
-        <div class="vertical-graph-<%= chapter %>">
-        </div>
-      <% end %>
+      <div class="vertical-graph" id="vertical-graph-all">
+      </div>
       <div class="annotation">
       </div>
-
+  </div>
+  <div id="hover-container">
   </div>
 
 </div>

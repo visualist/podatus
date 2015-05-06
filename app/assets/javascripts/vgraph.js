@@ -12,8 +12,8 @@ function render_vstream_graph(options) {
   d3.json(request_url, function(err, data){
 
     var delta = 1; // hack- when the data shifts a column or so
-    var z = data.sentences;
-    var data0 = [
+    window.z = data.sentences;
+    window.data0 = [
           z.map(function(d){ return {x: +d[0], y:  +d[5+delta], n:d[5], pos: 'N' } }),
           z.map(function(d){ return {x: +d[0], y: +d[10+delta], n:d[5], pos: 'P' } }),
 
@@ -27,7 +27,7 @@ function render_vstream_graph(options) {
           ];
 
     var stack = d3.layout.stack().offset(offset_type);
-    var layers0 = stack(data0);
+    window.layers0 = stack(data0);
 
     /* calc X and Y axis ranges */
     var xmin =  options['xmin'] || d3.min(layers0, function(layer) {
@@ -40,25 +40,25 @@ function render_vstream_graph(options) {
         xrangewidth = xwidth + xmin;
     }
 
-    var xrange = [
+    window.xrange = [
         xmin,
         xrangewidth || options['xmax'] || d3.max(layers0, function(layer) {
             return d3.max(layer, function(d) { return d.x; });
         })
     ];
 
-    var yrange = [
+    window.yrange = [
         options['ymin'] || 0,
         options['ymax'] || d3.max(layers0, function(layer) {
             return d3.max(layer, function(d){return d.y0 + d.y; });
         })
     ];
 
-    var x = d3.scale.linear()
+    window.x = d3.scale.linear()
               .domain(xrange)
               .range([0, height]);
 
-    var y = d3.scale.linear()
+    window.y = d3.scale.linear()
               .domain(yrange)
               .range([width, 0]);
 
@@ -70,8 +70,12 @@ function render_vstream_graph(options) {
                  .y1(function(d) { return y(d.y0 + d.y); });
 
     var svg = d3.select( css_selector ).append("svg")
+                .attr("xmlns", "http://www.w3.org/2000/svg")
+                .attr("version", "1.1")
                 .attr("width", width)
                 .attr("height", height);
+
+
 
     svg.selectAll("path")
         .data(layers0)
@@ -91,6 +95,19 @@ function render_vstream_graph(options) {
           var pos = data[0].pos;
           return POS.get_pos_color(pos);
         });
+
+    svg.selectAll("line")
+        .data(data0[0])
+      .enter().append("line")
+        .attr("x1", 0)
+        .attr("y1", function(d){return x(d.x)})
+        .attr("x2", 160)
+        .attr("y2", function(d){return x(d.x)})
+        .attr("stroke", "#404040")
+        .attr("stroke-width", "1")
+        .attr("class", "line-hover")
+        .attr("data-sn", function(d){return d.x})
+        .attr("opacity", ".1");
 
   });
 }
