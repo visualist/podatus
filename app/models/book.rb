@@ -10,7 +10,9 @@ class Book < ActiveRecord::Base
   end
 
   def sentence(id)
-    sentences.where(sentence: id).first
+    # 'seq' is by book, 'sentence' by chapter
+    # (chapter_seq would be better, but is currently unused)
+    sentences.where(seq: id).first
   end
 
   def sentence_count
