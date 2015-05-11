@@ -9,21 +9,25 @@ class Book < ActiveRecord::Base
     sentences.count > 0
   end
 
+  def notes # JSON // note: results are by sentence-id, for json response
+    sentences.select('id').where('note is not null').to_a.map(&:id)
+  end
+
   def sentence(id)
     # 'seq' is by book, 'sentence' by chapter
     # (chapter_seq would be better, but is currently unused)
     sentences.where(seq: id).first
   end
 
-  def sentence_count
+  def sentence_count # JSON
     sentences.count
   end
 
-  def chapters
+  def chapters # JSON
     sentences.order(:seq).pluck(:chapter).uniq
   end
 
-  def last_chapter
+  def last_chapter # JSON
     # TODO: handle the case with non-numeric chapters
     chapters.map{|ch| ch.to_i}.max
   end
