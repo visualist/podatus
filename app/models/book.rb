@@ -9,14 +9,14 @@ class Book < ActiveRecord::Base
     sentences.count > 0
   end
 
-  def notes # JSON // note: results are by sentence-id, for json response
-    sentences.select('id').where('note is not null').to_a.map(&:id)
-  end
-
   def sentence(id)
     # 'seq' is by book, 'sentence' by chapter
     # (chapter_seq would be better, but is currently unused)
     sentences.where(seq: id).first
+  end
+
+  def notes # JSON // note: results are by sentence-id, for json response
+    sentences.select('id').where('note is not null').to_a.map(&:id)
   end
 
   def sentence_count # JSON

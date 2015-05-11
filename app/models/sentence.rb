@@ -2,6 +2,7 @@ class Sentence < ActiveRecord::Base
   belongs_to :book #, foreign_key: "books_id"
 
   def pos_as_json
+    return nil if pos.nil?
     # suspect paren substitution will break this when parens are part of the content
     r = eval(pos.gsub('(', '[').gsub(')', ']'))
     r.to_json
