@@ -3,16 +3,49 @@
   var chapter_id = <%= @random_chapter_id %>;
   /* TODO: fix this suspect way to move data ruby->js */
   var chapters = <%= raw(@book.chapters.to_json) %>;
+  var notes = <%= raw(@book.notes.to_json) %>;
   var sentence_count = <%= @book.sentence_count %>,
       pixels_per_sentence = 3,
       graph_height = (pixels_per_sentence * sentence_count);
+
+  var vgraph_render_post_process = function() {
+    console.log('callback');
+    $.map(notes, function(sent_number, i) {
+        var req_url = "/book/" + book_id + "/sentence/" + sent_number + ".json"
+        $.get(req_url, function(d) {
+
+          var css_select = "#hline-" + sent_number;
+              elem = $(css_select),
+                 o = elem.offset(),
+              etop = o.top,
+             eleft = o.left,
+               div = $("<div>", {class: "a"});
+
+          div.css("position", "absolute")
+             .css("left", "16")
+             .css("top", etop)
+             .css("width", "180")
+             .css("z-index", "500")
+             .css("padding", "3px")
+             .css("color", "#909090")
+             .css("background-color", "#242424")
+             .css("font-size", "70%")
+             .css("border", "1px solid #606060")
+             .html(d.note);
+
+          console.log(sent_number + ": " + d.note);
+          $('body').append(div);
+        });
+    });
+  }
 
   $(document).ready(function() {
       var options = { book: book_id, chapter: 'all',
                           selector: "#vertical-graph-all",
                           width: 160, height: graph_height
                         };
-      render_vstream_graph(options);
+      render_vstream_graph(options, vgraph_render_post_process);
+      //render_post_process();
 
       $(document).on("mouseenter", ".line-hover", function(e) {
           var ypos = e.pageY - 62;

@@ -1,5 +1,5 @@
 
-function render_vstream_graph(options) {
+function render_vstream_graph(options, callback) {
   // TODO: provide sanity checking on options-params
   var request_url = "/book/" + options['book'] + "/chapter/" + options['chapter'] + ".json",
       css_selector = options['selector'],
@@ -105,10 +105,12 @@ function render_vstream_graph(options) {
         .attr("y2", function(d){return x(d.x)})
         .attr("stroke", "#404040")
         .attr("stroke-width", "1")
+        .attr("id", function(d){return "hline-" + d.x})
         .attr("class", "line-hover")
         .attr("data-sn", function(d){return d.x})
         .attr("opacity", ".1");
 
+    callback();
   });
 }
 
