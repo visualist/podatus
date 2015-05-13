@@ -16,7 +16,7 @@ class Book < ActiveRecord::Base
   end
 
   def notes # JSON // note: results are by sentence-id, for json response
-    sentences.select('id').where('note is not null').to_a.map(&:id)
+    sentences.select('seq').where('note is not null').to_a.map(&:seq)
   end
 
   def sentence_count # JSON
