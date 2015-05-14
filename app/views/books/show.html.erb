@@ -9,7 +9,7 @@
       graph_height = (pixels_per_sentence * sentence_count);
 
   var vgraph_render_post_process = function() {
-    console.log('callback');
+    //console.log('callback');
     $.map(notes, function(sent_number, i) {
         var req_url = "/book/" + book_id + "/sentence/" + sent_number + ".json"
         $.get(req_url, function(d) {
@@ -17,7 +17,7 @@
           var css_select = "#hline-" + sent_number;
               elem = $(css_select),
                  o = elem.offset(),
-              etop = o.top,
+              etop = o.top - 1,
              eleft = o.left,
                div = $("<div>", {class: "a"});
 
@@ -33,7 +33,7 @@
              .css("border", "1px solid #606060")
              .html(d.note);
 
-          console.log(sent_number + ": " + d.note);
+          //console.log(sent_number + ": " + d.note);
           $('body').append(div);
         });
     });
@@ -78,6 +78,9 @@
 </script>
 
 <style>
+  .vertical-graph-container {
+    position: absolute;
+  }
   #hover-container {
     margin-right: 30px;
     position: absolute;
@@ -91,9 +94,11 @@
   #vertical-graph-all {
     margin-left: 160px;
     margin-bottom: 40px;
+    padding-bottom: 60px;
   }
   line:hover {
-    stroke: #b0b0b0;
+    stroke: #9090b0;
+    stroke-width: 1;
     opacity: 1;
   }
 </style>
@@ -110,8 +115,8 @@
       </div>
       <div class="annotation">
       </div>
+      <div id="chapter-labels"></div>
   </div>
-  <div id="hover-container">
-  </div>
+  <div id="hover-container"></div>
 
 </div>
