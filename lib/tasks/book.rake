@@ -11,7 +11,7 @@ namespace :book do
   desc "find and print data"
   task :find => :environment do
     data = JsonReader.new('book').get
-    puts "Book Data: #{data.inspect}"
+    puts "Book Data (JSON): #{data.inspect}"
   end
 
   desc "load"
@@ -32,7 +32,7 @@ namespace :book do
   task :show => :environment do
     books = Book.all.order(:published_year)
     books.each do |book|
-      puts "#{book.title} by #{book.author}, #{book.published_year}"
+      puts "#{book.title} by #{book.author}, #{book.published_year} (ch=#{book.chapters.count}, s=#{book.sentences.count}) data? #{book.has_data?}, avail? #{book.available?}"
     end
   end
 
