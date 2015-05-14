@@ -17,20 +17,6 @@ var set_chapter_font_size = function(chapter, element) {
     element.css("font-size", fontsize + "%");
 }
 
-var keypress_handler = function(e) {
-    var elem = $(e.target);
-    var chapter = parseInt(elem.html());
-    var book = elem.data('book');
-    var bookGraph = bookGraphs[book-1]; // HACK!
-    chapter = keycode_functions(e.which, chapter, 1, bookGraph.last_chapter);
-    if (chapter) {
-        set_chapter_font_size(chapter, elem);
-        bookGraph.graph.render_chapter(chapter);
-        var key = "book" + book + "c";
-        basil.set(key, chapter);
-    }
-}
-
 $(document).ready(function() {
   bookGraphs = $.map(book_ids, function(book_id, i){
       var selctr = "#book-" + book_id;
@@ -51,6 +37,21 @@ $(document).ready(function() {
       });
       return x;
   });
+
+  var keypress_handler = function(e) {
+    var elem = $(e.target);
+    var chapter = parseInt(elem.html());
+    var book = elem.data('book');
+    var bookGraph = bookGraphs[book-1]; // HACK!
+    chapter = keycode_functions(e.which, chapter, 1, bookGraph.last_chapter);
+    if (chapter) {
+        set_chapter_font_size(chapter, elem);
+        bookGraph.graph.render_chapter(chapter);
+        var key = "book" + book + "c";
+        basil.set(key, chapter);
+    }
+  }
+
   basil = new window.Basil();
   bookGraphs.forEach(function(book){
       var key = "book" + book.book + "c",
