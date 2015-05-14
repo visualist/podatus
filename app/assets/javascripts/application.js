@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require jquery.columnizer
 //= require basil.min
+//= require lodash.min
 //= require_tree .
