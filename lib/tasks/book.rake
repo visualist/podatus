@@ -70,4 +70,13 @@ require 'csv'
     end
   end
 
+  desc "UNset availability flag"
+  task :unavailable => :environment do
+    Book.all.each do |book|
+      puts "#{book.title} (#{book.id}): available set to false"
+      book.available = false
+      book.save
+    end
+  end
+
 end
